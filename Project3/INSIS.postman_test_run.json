@@ -1,0 +1,426 @@
+{
+	"id": "9a047b40-80ee-41f6-8fa9-aac12a58caa0",
+	"name": "INSIS",
+	"timestamp": "2021-06-20T16:41:17.092Z",
+	"collection_id": "521d8752-091d-477f-8e27-5c3360f910a8",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 18,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "b6efdb59-cfb0-4ca0-b45e-5aaf6e66d0c3",
+			"name": "Post Config",
+			"url": "http://localhost:8084/configuration",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "45a98f89-2a60-4e33-8b5e-1f06d0ce7d45",
+			"name": "GetAllConfgs",
+			"url": "http://localhost:8085/configuration",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "68eff335-54d5-4012-a5d6-8eaec77b7f26",
+			"name": "Get by type",
+			"url": "http://localhost:8085/configuration/type/approach",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "be0f1ec5-9693-4413-8dbb-ad8643ae2505",
+			"name": "Get by name",
+			"url": "http://localhost:8085/configuration/name/Keyword1",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "fbcce823-8116-402b-b02d-2cd7519d2d11",
+			"name": "post people",
+			"url": "http://localhost:3000/persons",
+			"time": 12,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "eeb68639-8c1b-441e-a1bd-e98847264512",
+			"name": "get people",
+			"url": "http://localhost:3000/persons",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "f846bc61-e532-4e2b-ad03-454627f92c08",
+			"name": "PostProposal",
+			"url": "http://localhost:8090/proposal",
+			"time": 337,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				337
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "4e3f18ae-fdf1-4d2c-86ca-27520a8ad88b",
+			"name": "GetAllProposals",
+			"url": "http://localhost:8091/proposal",
+			"time": 409,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				409
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "b8ac7ef6-a4c8-461c-b057-d3c2c28a5e6d",
+			"name": "rooms",
+			"url": "http://localhost:8088/rooms",
+			"time": 32,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				32
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "2fdec579-a8a3-4461-ae3b-59f0386eda0e",
+			"name": "reservations",
+			"url": "http://localhost:8088/reservations",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "750297c0-17ce-40f2-a097-8a562c8bda0d",
+			"name": "New Request",
+			"url": "http://localhost:8088/reservations",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "d13a6408-054f-48b7-a960-08056c63d7e6",
+			"name": "rooms/reservations",
+			"url": "http://localhost:8089/reservations",
+			"time": 58,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				58
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Schema is valid": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 997,
+	"collection": {
+		"requests": [
+			{
+				"id": "b6efdb59-cfb0-4ca0-b45e-5aaf6e66d0c3",
+				"method": "POST"
+			},
+			{
+				"id": "45a98f89-2a60-4e33-8b5e-1f06d0ce7d45",
+				"method": "GET"
+			},
+			{
+				"id": "68eff335-54d5-4012-a5d6-8eaec77b7f26",
+				"method": "GET"
+			},
+			{
+				"id": "be0f1ec5-9693-4413-8dbb-ad8643ae2505",
+				"method": "GET"
+			},
+			{
+				"id": "fbcce823-8116-402b-b02d-2cd7519d2d11",
+				"method": "POST"
+			},
+			{
+				"id": "eeb68639-8c1b-441e-a1bd-e98847264512",
+				"method": "GET"
+			},
+			{
+				"id": "f846bc61-e532-4e2b-ad03-454627f92c08",
+				"method": "POST"
+			},
+			{
+				"id": "4e3f18ae-fdf1-4d2c-86ca-27520a8ad88b",
+				"method": "GET"
+			},
+			{
+				"id": "b8ac7ef6-a4c8-461c-b057-d3c2c28a5e6d",
+				"method": "POST"
+			},
+			{
+				"id": "2fdec579-a8a3-4461-ae3b-59f0386eda0e",
+				"method": "POST"
+			},
+			{
+				"id": "750297c0-17ce-40f2-a097-8a562c8bda0d",
+				"method": "PUT"
+			},
+			{
+				"id": "d13a6408-054f-48b7-a960-08056c63d7e6",
+				"method": "GET"
+			}
+		]
+	}
+}

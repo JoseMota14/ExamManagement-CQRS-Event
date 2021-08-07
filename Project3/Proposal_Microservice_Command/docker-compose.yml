@@ -1,0 +1,16 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: pg-proposal-command
+    image: postgres:12.3
+    ports:
+      - 54361:5432
+    environment:
+      - POSTGRES_DB=proposal_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  #app-proposal-command:
+   # image: proposal-c
+    #container_name: app-proposal-command
+    #ports:
+    #  - "8090:8090"

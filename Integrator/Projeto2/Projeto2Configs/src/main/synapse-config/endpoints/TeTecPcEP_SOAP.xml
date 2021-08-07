@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="TeTecPcEP_SOAP" xmlns="http://ws.apache.org/ns/synapse">
+    <wsdl port="SOAP12Endpoint" service="Temas_Technologies" uri="http://laptop-a4cvm70d:8280/services/Temas_Technologies?wsdl">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </wsdl>
+</endpoint>

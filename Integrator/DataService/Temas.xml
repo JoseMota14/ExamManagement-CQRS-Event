@@ -1,0 +1,23 @@
+<data name="Temas" transports="http https local">
+   <config enableOData="false" id="Temas">
+      <property name="excel_datasource">./samples/data-services/resources/Temas.xls</property>
+   </config>
+   <query id="GetTemas" useConfig="Temas">
+      <excel>
+         <workbookname>tema</workbookname>
+         <hasheader>true</hasheader>
+         <startingrow>2</startingrow>
+         <maxrowcount>-1</maxrowcount>
+         <headerrow>1</headerrow>
+      </excel>
+      <result defaultNamespace="Temas" element="Temas" rowName="Tema">
+         <element column="Id" name="Id" xsdType="string"/>
+         <element column="PalavrasChave" name="PalavrasChave" xsdType="string"/>
+         <element column="Nome" name="Nome" xsdType="string"/>
+         <element column="Tecnologia" name="Tecnologia" xsdType="string"/>
+      </result>
+   </query>
+   <operation name="GetTemas">
+      <call-query href="GetTemas"/>
+   </operation>
+</data>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="mockPostman1" name="Postman mock" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <serviceTask id="servicetask1" name="Keywords" activiti:class="org.wso2.carbon.bpmn.extensions.rest.RESTTask" activiti:extensionId="org.wso2.integrationstudio.bpmn.extensions.restTask.RESTTask">
+      <extensionElements>
+        <activiti:field name="serviceURL">
+          <activiti:string>http://localhost:8280/API/palavrasChave</activiti:string>
+        </activiti:field>
+        <activiti:field name="method">
+          <activiti:string>GET</activiti:string>
+        </activiti:field>
+        <activiti:field name="outputVariable">
+          <activiti:string>keywords</activiti:string>
+        </activiti:field>
+        <activiti:field name="httpStatusVariable">
+          <activiti:string>sta</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <parallelGateway id="parallelgateway1" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow14" sourceRef="startevent1" targetRef="parallelgateway1"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="parallelgateway1" targetRef="servicetask1"></sequenceFlow>
+    <serviceTask id="servicetask2" name="Approaches" activiti:class="org.wso2.carbon.bpmn.extensions.rest.RESTTask" activiti:extensionId="org.wso2.integrationstudio.bpmn.extensions.restTask.RESTTask">
+      <extensionElements>
+        <activiti:field name="serviceURL">
+          <activiti:string>http://localhost:8280/API/abordagens</activiti:string>
+        </activiti:field>
+        <activiti:field name="method">
+          <activiti:string>GET</activiti:string>
+        </activiti:field>
+        <activiti:field name="outputVariable">
+          <activiti:string>approaches</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow16" sourceRef="parallelgateway1" targetRef="servicetask2"></sequenceFlow>
+    <serviceTask id="servicetask3" name="Technologies" activiti:class="org.wso2.carbon.bpmn.extensions.rest.RESTTask" activiti:extensionId="org.wso2.integrationstudio.bpmn.extensions.restTask.RESTTask">
+      <extensionElements>
+        <activiti:field name="serviceURL">
+          <activiti:string>http://localhost:8280/API/tecnologias</activiti:string>
+        </activiti:field>
+        <activiti:field name="method">
+          <activiti:string>GET</activiti:string>
+        </activiti:field>
+        <activiti:field name="outputVariable">
+          <activiti:string>technologies</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow18" sourceRef="parallelgateway1" targetRef="servicetask3"></sequenceFlow>
+    <serviceTask id="servicetask4" name="Students" activiti:class="org.wso2.carbon.bpmn.extensions.rest.RESTTask" activiti:extensionId="org.wso2.integrationstudio.bpmn.extensions.restTask.RESTTask">
+      <extensionElements>
+        <activiti:field name="serviceURL">
+          <activiti:string>https://bbd486bd-6f12-4ce8-9b97-e73457440007.mock.pstmn.io/estudantes</activiti:string>
+        </activiti:field>
+        <activiti:field name="method">
+          <activiti:string>GET</activiti:string>
+        </activiti:field>
+        <activiti:field name="outputVariable">
+          <activiti:string>students</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow20" sourceRef="parallelgateway1" targetRef="servicetask4"></sequenceFlow>
+    <sequenceFlow id="flow21" sourceRef="servicetask1" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow22" sourceRef="servicetask2" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow23" sourceRef="servicetask3" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="servicetask4" targetRef="exclusivegateway1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway" default="flow27"></exclusiveGateway>
+    <serviceTask id="mailtask1" name="Mail Task" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string><![CDATA[1161263@isep.ipp]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string><![CDATA[1161263@isep.ipp]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string><![CDATA[Error postman]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="text">
+          <activiti:string><![CDATA[Erro postman]]></activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow25" sourceRef="exclusivegateway1" targetRef="mailtask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${sta=='404'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="terminateendevent1" name="TerminateEndEvent">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <sequenceFlow id="flow26" sourceRef="mailtask1" targetRef="terminateendevent1"></sequenceFlow>
+    <sequenceFlow id="flow27" sourceRef="exclusivegateway1" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_mockPostman1">
+    <bpmndi:BPMNPlane bpmnElement="mockPostman1" id="BPMNPlane_mockPostman1">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="310.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="585.0" y="294.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway1" id="BPMNShape_parallelgateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="200.0" y="247.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="312.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="310.0" y="284.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask4" id="BPMNShape_servicetask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="310.0" y="380.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="500.0" y="240.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="600.0" y="191.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="terminateendevent1" id="BPMNShape_terminateendevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="760.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="155.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="200.0" y="267.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="220.0" y="247.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="87.0"></omgdi:waypoint>
+        <omgdi:waypoint x="310.0" y="87.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="220.0" y="247.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="312.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="220.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="311.0"></omgdi:waypoint>
+        <omgdi:waypoint x="310.0" y="311.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="220.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="407.0"></omgdi:waypoint>
+        <omgdi:waypoint x="310.0" y="407.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="415.0" y="87.0"></omgdi:waypoint>
+        <omgdi:waypoint x="517.0" y="87.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="240.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="417.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="477.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="240.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="415.0" y="311.0"></omgdi:waypoint>
+        <omgdi:waypoint x="477.0" y="311.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="415.0" y="407.0"></omgdi:waypoint>
+        <omgdi:waypoint x="517.0" y="407.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="520.0" y="240.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="218.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="705.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="760.0" y="217.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="520.0" y="280.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="311.0"></omgdi:waypoint>
+        <omgdi:waypoint x="585.0" y="311.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

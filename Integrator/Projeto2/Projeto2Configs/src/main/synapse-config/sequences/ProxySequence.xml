@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProxySequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <smooks config-key="SmooksEntry">
+        <input type="text"/>
+        <output type="xml"/>
+    </smooks>
+    <log level="full"/>
+    <iterate expression="//csv-set/csv-record" id="iterate">
+        <target>
+            <sequence>
+                <propertyGroup>
+                    <property expression="//./a" name="proponente" scope="default" type="STRING"/>
+                    <property expression="//./b" name="titulo" scope="default" type="STRING"/>
+                </propertyGroup>
+                <log level="full">
+                    <property expression="get-property(&quot;proponente&quot;)" name="teste"/>
+                </log>
+                <payloadFactory media-type="json">
+                    <format>{&#xd;
+   "variables": [&#xd;
+      {&#xd;
+        "name":"myVar",&#xd;
+        "value":"This is a variable"&#xd;
+      }&#xd;
+   ],&#xd;
+   "processDefinitionId": "geral:1:285121"&#xd;
+}</format>
+                    <args/>
+                </payloadFactory>
+                <propertyGroup>
+                    <property expression="get-property('AuthEntry')" name="AuthEntry" scope="default" type="OM"/>
+                    <property expression="$ctx:AuthEntry//*[local-name()='username']" name="username" scope="default" type="STRING"/>
+                    <property expression="$ctx:AuthEntry//*[local-name()='password']" name="password" scope="default" type="STRING"/>
+                    <property expression="fn:concat($ctx:username,':',$ctx:password)" name="credentials" scope="default" type="STRING"/>
+                    <property expression="fn:concat('Basic ', base64Encode($ctx:credentials))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+                </propertyGroup>
+                <send>
+                    <endpoint key="CriarPropostas"/>
+                </send>
+            </sequence>
+        </target>
+    </iterate>
+</sequence>

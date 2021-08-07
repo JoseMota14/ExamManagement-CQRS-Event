@@ -1,0 +1,112 @@
+version: "3"
+services:
+  configuration-query-database:
+    container_name: configuration-query-database
+    image: postgres:12.3
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=configuration
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  configuration-command-database:
+    container_name: configuration-command-database
+    image: postgres:12.3
+    ports:
+      - 54331:5432
+    environment:
+      - POSTGRES_DB=configuration_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  prova-query-database:
+    container_name: prova-query-database-pg
+    image: postgres:12.3
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_DB=prova_query
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  prova-command-database:
+    container_name: prova-command-database-pg
+    image: postgres:12.3
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=prova_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  proposal-command-database:
+    container_name: proposal-command-database
+    image: postgres:12.3
+    ports:
+      - 54361:5432
+    environment:
+      - POSTGRES_DB=proposal_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  proposal-query-database:
+    container_name: proposal-query-database
+    image: postgres:12.3
+    ports:
+      - 5437:5432
+    environment:
+      - POSTGRES_DB=proposal_query
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  configuration-query-microservice:
+    image: config-q
+    container_name: configuration-query-microservice
+    ports:
+      - "8085:8085"
+    restart: always
+  configuration-command-microservice:
+    image: config-c
+    container_name: configuration-command-microservice
+    ports:
+      - "8084:8084"
+    restart: always
+  prova-query-microservice:
+    image: prova-q
+    container_name: prova-query-microservice
+    ports:
+      - "8089:8089"
+    restart: always
+  prova-command-microservice:
+    image: prova-c
+    container_name: prova-command-microservice
+    ports:
+      - "8088:8088"
+    restart: always
+  proposal-command-microservice:
+    image: proposal-c
+    container_name: proposal-command-microservice
+    ports:
+      - "8090:8090"
+    restart: always
+  proposal-query-microservice:
+    image: proposal-q
+    container_name: proposal-query-microservice
+    ports:
+      - "8091:8091"
+    restart: always
+  mongodb:
+    container_name: people-mongo-database
+    image: mongo:latest
+    environment:
+      - MONGODB_DATABASE="people"
+    ports:
+      - 27017:27017
+    restart: always
+  people-api:
+    image: people-app-image
+    container_name: people-api
+    ports:
+      - "3000:3000"
+    restart: always

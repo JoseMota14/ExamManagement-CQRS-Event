@@ -1,0 +1,17 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: configuration-command-database
+    image: postgres:12.3
+    ports:
+      - 54331:5432
+    environment:
+      - POSTGRES_DB=configuration_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  #configuration-command-microservice:
+  #  image: config-c
+  #  container_name: configuration-command-microservice
+  #  ports:
+  #    - "8084:8084"
+  #  restart: always

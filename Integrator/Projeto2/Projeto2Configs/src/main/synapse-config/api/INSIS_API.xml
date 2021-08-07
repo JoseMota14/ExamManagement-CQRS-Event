@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/API" name="INSIS_API" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" url-mapping="/temas">
+        <inSequence>
+            <sequence key="SOAPTemasSequence"/>
+            <foreach expression="//*[local-name()='Nome']">
+                <sequence>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <Group xmlns="">$1</Group>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="//*[local-name()='Nome']"/>
+                        </args>
+                    </payloadFactory>
+                </sequence>
+            </foreach>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="//*[local-name()='Group'][not(text()=preceding-sibling::*[local-name()='Group']/text())]"/>
+                </args>
+            </payloadFactory>
+            <sequence key="ScriptSequence"/>
+            <send/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/abordagens">
+        <inSequence>
+            <clone>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="AbTecPcEP"/>
+                        </call>
+                        <foreach expression="//*[local-name()='abordagem']" id="abor">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='abordagem']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="AbPcEP"/>
+                        </call>
+                        <filter regex="true" source="count(//*[local-name()='name'])>0">
+                            <then/>
+                            <else>
+                                <payloadFactory media-type="json">
+                                    <format>[&#xd;
+{"name":"approach1", "keywords":["kw1", "kw2", "kw3"]},&#xd;
+{"name":"approach2", "keywords":["kw3", "kw4"]},&#xd;
+{"name":"approach3", "keywords":["kw3"]},&#xd;
+{"name":"approach4", "keywords":[]}&#xd;
+]</format>
+                                    <args/>
+                                </payloadFactory>
+                            </else>
+                        </filter>
+                        <foreach expression="//*[local-name()='name']" id="abor2">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='name']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+            </clone>
+            <property name="enclosing_element" scope="default">
+                <value xmlns=""/>
+            </property>
+            <aggregate>
+                <completeCondition>
+                    <messageCount max="2" min="2"/>
+                </completeCondition>
+                <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="//*[local-name() ='Group']">
+                    <sequence key="ScriptSequence"/>
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/palavrasChave">
+        <inSequence>
+            <clone>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="AbTecPcEP"/>
+                        </call>
+                        <foreach expression="//*[local-name()='palavras_chave']">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='palavras_chave']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="AbPcEP"/>
+                        </call>
+                        <filter regex="true" source="count(//*[local-name()='keywords'])>0">
+                            <then/>
+                            <else>
+                                <payloadFactory media-type="json">
+                                    <format>[&#xd;
+{"name":"approach1", "keywords":["kw1", "kw2", "kw3"]},&#xd;
+{"name":"approach2", "keywords":["kw3", "kw4"]},&#xd;
+{"name":"approach3", "keywords":["kw3"]},&#xd;
+{"name":"approach4", "keywords":[]}&#xd;
+]</format>
+                                    <args/>
+                                </payloadFactory>
+                            </else>
+                        </filter>
+                        <foreach expression="//*[local-name()='keywords']">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='keywords']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="SOAPPalavraChaveSequence"/>
+                        <log level="full"/>
+                        <foreach expression="//*[local-name()='Name']">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='Name']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="SOAPTemasSequence"/>
+                        <foreach expression="//*[local-name()='PalavrasChave']">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='PalavrasChave']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+            </clone>
+            <property name="enclosing_element" scope="default">
+                <value xmlns=""/>
+            </property>
+            <aggregate>
+                <completeCondition>
+                    <messageCount max="4" min="3"/>
+                </completeCondition>
+                <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="//*[local-name() = 'Group']">
+                    <sequence key="ScriptSequence"/>
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/tecnologias">
+        <inSequence>
+            <clone>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="AbTecPcEP"/>
+                        </call>
+                        <foreach expression="//*[local-name()='tecnologias']" id="tec">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='tecnologias']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="SOAPTemasSequence"/>
+                        <foreach expression="//*[local-name()='Tecnologia']" id="tec2">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='Tecnologia']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="SOAPTecnologiasSequence"/>
+                        <foreach expression="//*[local-name()='Name']" id="tec4">
+                            <sequence>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <Group xmlns="">$1</Group>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="//*[local-name()='Name']"/>
+                                    </args>
+                                </payloadFactory>
+                            </sequence>
+                        </foreach>
+                    </sequence>
+                </target>
+            </clone>
+            <property name="enclosing_element" scope="default">
+                <value xmlns=""/>
+            </property>
+            <aggregate>
+                <completeCondition>
+                    <messageCount max="3" min="3"/>
+                </completeCondition>
+                <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="//*[local-name() = 'Group']">
+                    <sequence key="ScriptSequence"/>
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/teste">
+        <inSequence>
+            <call>
+                <endpoint key="AbTecPcEP"/>
+            </call>
+            <send/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" uri-template="/propostas/{filtro}">
+        <inSequence>
+            <sequence key="SOAPPropostas"/>
+            <foreach expression="//*[local-name()='Proposta']" id="Todas">
+                <sequence>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <Group xmlns="">$1</Group>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="//*[local-name()='Proposta']"/>
+                        </args>
+                    </payloadFactory>
+                </sequence>
+            </foreach>
+            <property expression="get-property(&quot;uri.var.filtro&quot;)" name="filterValue" scope="default" type="STRING"/>
+            <log level="full"/>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="//*[local-name()='Group']"/>
+                </args>
+            </payloadFactory>
+            <property expression="json-eval($)" name="json" scope="default" type="STRING"/>
+            <script language="js"><![CDATA[var json = mc.getProperty("json");
+var log = mc.getServiceLog();
+json = JSON.parse(json).Group;
+var result = [];
+var map = {};
+var filter = mc.getProperty("uri.var.filtro");
+log.info(filter)
+json.forEach(function (entry, i) {
+  log.info(JSON.stringify(entry))
+  if (entry.Proposta.Estado == filter) {
+    result.push(JSON.stringify(entry));
+  }
+});
+log.info(result);
+mc.setProperty("json", "[" + String(result) + "]");]]></script>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('json')"/>
+                </args>
+            </payloadFactory>
+            <log level="full"/>
+            <send/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>

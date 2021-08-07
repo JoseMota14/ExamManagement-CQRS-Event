@@ -1,0 +1,21 @@
+<data name="Tecnologias" transports="http https local">
+   <config enableOData="false" id="Tecnologias">
+      <property name="excel_datasource">./samples/data-services/resources/Technologies.xls</property>
+   </config>
+   <query id="GetTecnologias" useConfig="Tecnologias">
+      <excel>
+         <workbookname>technology</workbookname>
+         <hasheader>true</hasheader>
+         <startingrow>2</startingrow>
+         <maxrowcount>-1</maxrowcount>
+         <headerrow>1</headerrow>
+      </excel>
+      <result defaultNamespace="technology" element="Tecnologias" rowName="Tecnologia">
+         <element column="Id" name="Id" xsdType="string"/>
+         <element column="Name" name="Name" xsdType="string"/>
+      </result>
+   </query>
+   <operation name="GetTecnologias">
+      <call-query href="GetTecnologias"/>
+   </operation>
+</data>

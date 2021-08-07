@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SOAPTecnologiasSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <header name="Action" scope="default" value="urn:GetTecnologias"/>
+    <call>
+        <endpoint key="TecnologiasEP_SOAP"/>
+    </call>
+</sequence>

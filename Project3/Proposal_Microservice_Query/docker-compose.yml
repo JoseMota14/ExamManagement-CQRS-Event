@@ -1,0 +1,11 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: pg-proposal_query
+    image: postgres:12.3
+    ports:
+      - 5437:5432
+    environment:
+      - POSTGRES_DB=proposal_query
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust

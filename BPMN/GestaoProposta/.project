@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>GestaoProposta</name>
+	<comment></comment>
+	<projects>
+		<project>sendEmail</project>
+		<project>utils</project>
+		<project>util</project>
+		<project>insis-20-21-example-support</project>
+		<project>properties</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.activiti.designer.nature</nature>
+	</natures>
+</projectDescription>

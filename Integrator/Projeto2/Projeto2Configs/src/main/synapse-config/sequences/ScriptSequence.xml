@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ScriptSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="xml" expression="//*[local-name()='Group'][not(text()=preceding-sibling::*[local-name()='Group']/text())]"/>
+        </args>
+    </payloadFactory>
+    <property expression="json-eval($)" name="json" scope="default" type="STRING"/>
+    <script language="js"><![CDATA[var json = mc.getProperty("json");
+var log = mc.getServiceLog();
+json = JSON.parse(json).Group;
+var result = [];
+var map = {};
+json.forEach(function (entry, i) {
+  var tecs = entry.split(",");
+  for (var j = 0; j < tecs.length; j++) {
+    var newName = tecs[j].replace('"', "").replace('"', "").trim();
+    if (!map[newName]) {
+      result.push(
+        JSON.stringify({
+          id: i,
+          name: newName,
+        })
+      );
+      map[newName] = true;
+    }
+  }
+});
+log.info(result);
+mc.setProperty("json", "[" + String(result) + "]");]]></script>
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="xml" expression="get-property('json')"/>
+        </args>
+    </payloadFactory>
+</sequence>

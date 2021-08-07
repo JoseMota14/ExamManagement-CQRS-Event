@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SOAPPropostas" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="REST_URL_POSTFIX" scope="default" type="STRING" value=""/>
+    <payloadFactory media-type="xml">
+        <format>
+            <dat:GetPropostas xmlns:dat="http://ws.wso2.org/dataservice"/>
+        </format>
+        <args/>
+    </payloadFactory>
+    <call>
+        <endpoint key="Propostas"/>
+    </call>
+</sequence>

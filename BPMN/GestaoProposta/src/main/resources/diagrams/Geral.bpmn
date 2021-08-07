@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="geral" name="Start process" isExecutable="true" activiti:candidateStarterGroups="proponente">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <callActivity id="callactivity1" name="Proposal " calledElement="myProcess">
+      <extensionElements>
+        <activiti:out source="title" target="titleVar"></activiti:out>
+        <activiti:out source="technologies" target="technologiesVar"></activiti:out>
+        <activiti:out source="keywords" target="keywordsVar"></activiti:out>
+        <activiti:out source="approaches" target="approachesVar"></activiti:out>
+        <activiti:out source="students" target="studentsVar"></activiti:out>
+        <activiti:out source="problem" target="problemVar"></activiti:out>
+        <activiti:out source="objectives" target="objectivesVar"></activiti:out>
+        <activiti:out source="timeLimit" target="timeLimitVar"></activiti:out>
+        <activiti:out source="retry" target="retryVar"></activiti:out>
+        <activiti:out source="proponenteName" target="proponente"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="callactivity1"></sequenceFlow>
+    <callActivity id="callactivity2" name="Accept proposal" calledElement="aceitacao">
+      <extensionElements>
+        <activiti:in source="titleVar" target="titleVar2"></activiti:in>
+        <activiti:in source="technologiesVar" target="technologiesVar2"></activiti:in>
+        <activiti:in source="keywordsVar" target="keywordsVar2"></activiti:in>
+        <activiti:in source="approachesVar" target="approachesVar2"></activiti:in>
+        <activiti:in source="studentsVar" target="studentsVar2"></activiti:in>
+        <activiti:in source="problemVar" target="problemVar2"></activiti:in>
+        <activiti:in source="objectivesVar" target="objectivesVar2"></activiti:in>
+        <activiti:in source="proponente" target="proponenteName"></activiti:in>
+        <activiti:in source="retryVar" target="retry"></activiti:in>
+        <activiti:in source="timeLimitVar" target="timeLimit"></activiti:in>
+        <activiti:out source="studentName" target="studentNameVar"></activiti:out>
+        <activiti:out source="teacher" target="teacherVar"></activiti:out>
+        <activiti:out source="docentes" target="docentesVar"></activiti:out>
+        <activiti:out source="email" target="emailVar"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow2" sourceRef="callactivity1" targetRef="callactivity2"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow3" sourceRef="callactivity2" targetRef="callactivity3"></sequenceFlow>
+    <callActivity id="callactivity3" name="Formalization" calledElement="Formalization">
+      <extensionElements>
+        <activiti:in source="studentNameVar" target="studentName"></activiti:in>
+        <activiti:in source="teacherVar" target="orientador"></activiti:in>
+        <activiti:in source="docentesVar" target="docentes"></activiti:in>
+        <activiti:in source="retryVar" target="retry"></activiti:in>
+        <activiti:in source="timeLimitVar" target="timeLimit"></activiti:in>
+        <activiti:in source="emailVar" target="email"></activiti:in>
+        <activiti:out source="studentName" target="studentProva"></activiti:out>
+        <activiti:out source="orientador" target="orientadorProva"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow4" sourceRef="callactivity3" targetRef="callactivity4"></sequenceFlow>
+    <callActivity id="callactivity4" name="Manage prova" calledElement="gestaoProva">
+      <extensionElements>
+        <activiti:in source="studentProva" target="estudante"></activiti:in>
+        <activiti:in source="orientadorProva" target="orientador"></activiti:in>
+        <activiti:in source="retryVar" target="retry"></activiti:in>
+        <activiti:in source="timeLimitVar" target="timeLimit"></activiti:in>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow5" sourceRef="callactivity4" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_geral">
+    <bpmndi:BPMNPlane bpmnElement="geral" id="BPMNPlane_geral">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="callactivity1" id="BPMNShape_callactivity1">
+        <omgdc:Bounds height="71.0" width="121.0" x="220.0" y="172.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="callactivity2" id="BPMNShape_callactivity2">
+        <omgdc:Bounds height="71.0" width="161.0" x="400.0" y="172.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="970.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="callactivity3" id="BPMNShape_callactivity3">
+        <omgdc:Bounds height="71.0" width="131.0" x="630.0" y="172.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="callactivity4" id="BPMNShape_callactivity4">
+        <omgdc:Bounds height="71.0" width="111.0" x="810.0" y="172.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="155.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="220.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="341.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="400.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="561.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="761.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="810.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="921.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="970.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

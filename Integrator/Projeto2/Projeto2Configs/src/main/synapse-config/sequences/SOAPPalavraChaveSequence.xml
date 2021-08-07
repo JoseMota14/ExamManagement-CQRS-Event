@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SOAPPalavraChaveSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <header name="Action" scope="default" value="getKeywords"/>
+    <payloadFactory media-type="xml">
+        <format>
+            <dat:getKeywords xmlns:dat="http://ws.wso2.org/dataservice%22/%3E"/>
+        </format>
+        <args/>
+    </payloadFactory>
+    <call>
+        <endpoint key="PcEP_SOAP"/>
+    </call>
+</sequence>

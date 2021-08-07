@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SOAPTemasSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log/>
+    <property name="REST_URL_POSTFIX" scope="default" type="STRING" value=""/>
+    <payloadFactory media-type="xml">
+        <format>
+            <dat:GetTemas xmlns:dat="http://ws.wso2.org/dataservice"/>
+        </format>
+        <args/>
+    </payloadFactory>
+    <call>
+        <endpoint key="TeTecPcEP_SOAP"/>
+    </call>
+</sequence>

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: prova-command-database
+    image: postgres:12.3
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=prova_command
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  #prova-command-microservice:
+  #  image: prova-c
+  #  container_name: prova-command-microservice
+  #  ports:
+  #    - "8088:8088"
+  #  restart: always

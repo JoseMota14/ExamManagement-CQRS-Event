@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="PcEP_SOAP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/PcEP_SOAP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+    <artifact name="AbTecPcEP" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/AbTecPcEP.xml</file>
+    </artifact>
+</artifacts>

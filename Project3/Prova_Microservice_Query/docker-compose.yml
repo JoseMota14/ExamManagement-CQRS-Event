@@ -1,0 +1,17 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: prova-query-database
+    image: postgres:12.3
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_DB=prova_query
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  #app-prova-q:
+   # image: prova-q
+    #container_name: app-prova-q
+    #ports:
+     # - "8089:8089"

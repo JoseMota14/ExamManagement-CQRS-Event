@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="LoadProposals" startOnLoad="true" transports="vfs" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <log level="full" separator=","/>
+            <clone>
+                <target>
+                    <sequence>
+                        <sequence key="ProxySequence"/>
+                    </sequence>
+                </target>
+            </clone>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+    <parameter name="transport.PollInterval">10</parameter>
+    <parameter name="transport.vfs.FileURI">file://C:\Users\morei\Documents\ISEP\Mestrado\INSIS\REPO-INSIS\Integrator\in</parameter>
+    <parameter name="transport.vfs.ContentType">text/plain</parameter>
+    <parameter name="transport.vfs.ActionAfterProcess">MOVE</parameter>
+    <parameter name="transport.vfs.MoveAfterFailure">file://C:\Users\morei\Documents\ISEP\Mestrado\INSIS\REPO-INSIS\Integrator\error</parameter>
+    <parameter name="transport.vfs.ActionAfterFailure">MOVE</parameter>
+    <parameter name="transport.vfs.FileNamePattern">.*.csv</parameter>
+    <parameter name="transport.vfs.MoveAfterProcess">file://C:\Users\morei\Documents\ISEP\Mestrado\INSIS\REPO-INSIS\Integrator\out</parameter>
+</proxy>

@@ -1,0 +1,6 @@
+CREATE TABLE Config (
+    id integer NOT NULL,
+    name text COLLATE pg_catalog."default" NOT NULL,
+    type text COLLATE pg_catalog."default",
+    CONSTRAINT "Config_pkey" PRIMARY KEY (id)
+)

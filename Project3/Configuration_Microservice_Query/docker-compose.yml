@@ -1,0 +1,17 @@
+version: "3"
+services:
+  pg-tasks:
+    container_name: configuration-query-database
+    image: postgres:12.3
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=configuration
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+  #app-config-q:
+   # image: config-q
+    #container_name: app-config-q
+    #ports:
+     # - "8085:8085"
